@@ -1,0 +1,160 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Portafolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 0.8s ease-out forwards;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+        /* Brillo suave al hacer hover en las tarjetas */
+        .project-card:hover {
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.5); /* morado oscuro */
+            transform: translateY(-5px);
+            transition: 0.3s ease;
+        }
+
+        /* Para el efecto de bolita dinámica en el resumen */
+        .cursor-light {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.3), transparent 70%);
+            pointer-events: none;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+        }
+
+        .summary-box {
+            position: relative;
+            overflow: hidden;
+        }
+    #light-cursor {
+        position: absolute;
+        width: 80px;
+        height: 80px;
+        background: radial-gradient(circle, rgba(155, 102, 255, 0.25), transparent 70%);
+        pointer-events: none;
+        border-radius: 50%;
+        z-index: 0;
+        opacity: 0;
+        transform: translate(-50%, -50%);
+        transition: opacity 0.3s ease, transform 0.2s ease;
+        animation: gradientShift 6s ease-in-out infinite alternate;
+    }
+
+    @keyframes gradientShift {
+        0% {
+            background: radial-gradient(circle, rgba(155, 102, 255, 0.25), transparent 70%);
+        }
+        50% {
+            background: radial-gradient(circle, rgba(102, 155, 255, 0.25), transparent 70%);
+        }
+        100% {
+            background: radial-gradient(circle, rgba(102, 255, 200, 0.25), transparent 70%);
+        }
+    }
+</style>
+
+</head>
+<body class="bg-gradient-to-b from-[#0a0a1f] via-[#1c1839] to-[#121020] text-white min-h-screen py-10 px-6 relative bg-gradient-to-br from-[#0d0d0d] to-[#1a1a2e] bg-fixed">
+    <!-- Agrega la clase fade-in-up en cada .project-card y resumen -->
+
+    <!-- Bolita que sigue el mouse en la sección del resumen -->
+    <div id="light-cursor" class="cursor-light hidden md:block"></div>
+
+    <!-- SECCIÓN DE PRESENTACIÓN -->
+    <section class="max-w-6xl mx-auto mb-16 relative z-10">
+        <div class="grid md:grid-cols-2 gap-10 items-center bg-gray-900 bg-opacity-50 p-8 rounded-2xl shadow-2xl border border-purple-800 summary-box" id="summary-box">
+            <!-- Resumen -->
+            <div class="z-10">
+                <h1 class="text-4xl font-bold mb-4 text-purple-400">¡Hola! Soy Andrés</h1>
+                <p class="text-gray-300 text-lg">
+                    Desarrollador web en formación, apasionado por la ciencia de datos y la programación.
+                    Me especializo en Python, Django y creación de aplicaciones web con un enfoque limpio y funcional.
+                    Actualmente estudio Análisis y Desarrollo de Software en el SENA.
+                </p>
+            </div>
+
+            <!-- Contactos -->
+            <div class="flex flex-col gap-4 z-10">
+                <h2 class="text-2xl font-semibold text-indigo-400">Contáctame</h2>
+                <a href="https://github.com/tuusuario" target="_blank" class="hover:underline text-gray-300">🐱 GitHub</a>
+                <a href="https://linkedin.com/in/tuusuario" target="_blank" class="hover:underline text-gray-300">🔗 LinkedIn</a>
+                <a href="https://wa.me/57TU_NUMERO" target="_blank" class="hover:underline text-gray-300">📱 WhatsApp</a>
+                <a href="mailto:tucorreo@example.com" class="hover:underline text-gray-300">✉️ e-mail</a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- SECCIÓN DE PROYECTOS -->
+    <section class="max-w-6xl mx-auto relative z-10">
+        <h1 class="text-3xl font-bold mb-8 text-white border-b border-purple-600 pb-2">🚀 Mis Proyectos</h1>
+        <div class="grid md:grid-cols-2 gap-8">
+            {% for project in projects %}
+                <div class="project-card bg-[#1f1f2e] border border-purple-700 rounded-2xl shadow-lg p-6 transition-transform duration-300">
+                    <h2 class="text-2xl font-bold mb-2 text-purple-300">{{ project.title }}</h2>
+                    <p class="text-gray-400 mb-4">{{ project.description }}</p>
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}" class="rounded-md mb-4 max-h-56 object-cover w-full border border-purple-600">
+                    <a href="{{ project.url }}" class="text-indigo-300 hover:text-indigo-400 font-semibold transition-colors duration-200">🔗 Ver sitio web</a>
+                    <!-- Dentro del bloque donde muestras cada proyecto -->
+                    <div class="flex flex-wrap mt-2">
+                        {% for tech in project.technologies.all %}
+                            <span class="bg-purple-700 text-white text-sm font-medium px-2 py-1 rounded-full mr-2 mb-1">{{ tech.name }}</span>
+                        {% endfor %}
+                    </div>
+
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+<!-- JS para efecto de bolita que sigue el mouse -->
+<!-- JS para mostrar/ocultar la bolita mágica -->
+<script>
+    const cursorLight = document.getElementById('light-cursor');
+    const summaryBox = document.getElementById('summary-box');
+
+    summaryBox.addEventListener('mouseenter', () => {
+        cursorLight.style.opacity = '1';
+    });
+
+    summaryBox.addEventListener('mouseleave', () => {
+        cursorLight.style.opacity = '0';
+    });
+
+    summaryBox.addEventListener('mousemove', (e) => {
+        const rect = summaryBox.getBoundingClientRect();
+        const x = e.clientX;
+        const y = e.clientY;
+
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const distance = Math.sqrt(Math.pow(x - centerX, 2) + Math.pow(y - centerY, 2));
+
+        const intensity = Math.min(1, distance / Math.max(rect.width, rect.height));
+        const scale = 1 + intensity * 0.5;
+
+        cursorLight.style.transform = `translate(-50%, -50%) scale(${scale})`;
+        cursorLight.style.left = `${x}px`;
+        cursorLight.style.top = `${y}px`;
+    });
+</script>
+
+
+
+</body>
+</html>
