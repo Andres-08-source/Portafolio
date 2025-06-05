@@ -1,4 +1,6 @@
 from django.db import models
+from cloudinary.models import CloudinaryField
+
 
 # Create your models here.
 class Technology(models.Model):
@@ -11,7 +13,7 @@ class Project(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     link = models.URLField()
-    image = models.ImageField(upload_to="project_images/", null=True, blank=True)
+    image = CloudinaryField('image', null=True, blank=True)
     date = models.DateField(auto_now_add=False)
     technologies = models.ManyToManyField(Technology)  # ¡Aquí la magia!
 
