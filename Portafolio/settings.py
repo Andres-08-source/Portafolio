@@ -43,6 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'main.apps.MainConfig',
+    'cloudinary',
+    'cloudinary_storage',
+    'storages',
+
 ]
 
 MIDDLEWARE = [
@@ -137,3 +141,11 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dobihdybc',
+    'API_KEY': '484146346123295',
+    'API_SECRET': '0LrQ92PHd21tkU528Sdg6PlaNCs',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
