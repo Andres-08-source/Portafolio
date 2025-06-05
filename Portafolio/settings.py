@@ -81,9 +81,7 @@ WSGI_APPLICATION = 'Portafolio.wsgi.application'
 
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default='postgres://andres:3043338523Le@localhost:5432/portafolio_db'
-    )
+    'default': dj_database_url.config(default=os.environ.get("DATABASE_URL"))
 }
 
 
