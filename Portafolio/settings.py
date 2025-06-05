@@ -83,6 +83,8 @@ WSGI_APPLICATION = 'Portafolio.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config(default=os.environ.get("DATABASE_URL"))
 }
+print("DATABASE_URL =", os.environ.get("DATABASE_URL"))
+
 
 
 # Password validation
