@@ -140,8 +140,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
@@ -150,5 +148,6 @@ CLOUDINARY_STORAGE = {
     'API_KEY': '484146346123295',
     'API_SECRET': '0LrQ92PHd21tkU528Sdg6PlaNCs',
 }
+MEDIA_URL = 'https://res.cloudinary.com/dobihdybc/'  # Ajusta con tu cloud name
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
