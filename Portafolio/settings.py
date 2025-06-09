@@ -87,8 +87,6 @@ WSGI_APPLICATION = 'Portafolio.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
-
-
 DATABASES = {
     'default': dj_database_url.parse(config('DATABASE_URL'))
 }
@@ -119,11 +117,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
 
@@ -133,6 +128,7 @@ USE_TZ = True
 # Configuración estática
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [os.path.join(BASE_DIR / "static")]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # Default primary key field type
@@ -143,11 +139,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
+# uso de la nube cloudinary
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'dobihdybc',
     'API_KEY': '484146346123295',
     'API_SECRET': '0LrQ92PHd21tkU528Sdg6PlaNCs',
 }
 MEDIA_URL = 'https://res.cloudinary.com/dobihdybc/'  # Ajusta con tu cloud name
-
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
