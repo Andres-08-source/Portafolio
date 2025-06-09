@@ -30,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret-key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DEBUG', 'False') == 'True'
+DEBUG = True
 
 ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
 
@@ -145,5 +145,12 @@ CLOUDINARY_STORAGE = {
     'API_KEY': '484146346123295',
     'API_SECRET': '0LrQ92PHd21tkU528Sdg6PlaNCs',
 }
+cloudinary.config(
+    cloud_name='dobihdybc',
+    api_key='484146346123295',
+    api_secret='0LrQ92PHd21tkU528Sdg6PlaNCs',
+    secure=True
+)
+
 MEDIA_URL = 'https://res.cloudinary.com/dobihdybc/'  # Ajusta con tu cloud name
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
