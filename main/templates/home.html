@@ -397,19 +397,19 @@
             <nav>
                 <ul>
                     <li><a href="#about" class="nav-link active">Sobre mí</a></li>
-                    <li><a href="#interests" class="nav-link">Áreas de conocimientos</a></li>
                     <li><a href="#projects" class="nav-link">Mis Proyectos</a></li>
+                    <li><a href="#interests" class="nav-link">Áreas de conocimientos</a></li>
                     <li><a href="#contact" class="nav-link">Contacto</a></li>
-                    <!--<li><a href="#skills" class="nav-link">Habilidades</a></li>-->
+                    <li><a href="#skills" class="nav-link">Habilidades</a></li>
                 </ul>
             </nav>
         </header>
 
         <section class="hero fade-in" id="about">
             <div class="hero-content">
-                <h1>¡Hola! Soy Andrés 🚀</h1>
-                <p>Soy Bairon Andrés Leguizamón, estudiante de Análisis y Desarrollo de Software en el SENA,
-                    con sólida formación autodidacta en desarrollo web y actualmente en proceso de capacitación en Ciencia de Datos.
+                <h1>¡Hola! Soy Andrés 🧑‍💻</h1>
+                <p>Soy Bairon Andrés Leguizamón Medina, estudiante de Análisis y Desarrollo de Software en el SENA,
+                    con sólida formación autodidacta en desarrollo web Back-End y actualmente en proceso de capacitación en Ciencia de Datos.
                     Me especializo en construir aplicaciones modernas y funcionales usando <strong>Python, Django, PostgreSQL</strong> y otras tecnologias.
                     Me apasiona crear soluciones que mezclen diseño atractivo con lógica sólida y propósito real.
                     Me definen la disciplina, la curiosidad constante y una visión clara hacia el futuro en el mundo tecnológico.
@@ -424,8 +424,29 @@
             </div>
         </section>
 
+
+        <section class="section fade-in" id="projects">
+            <h2>Mis Proyectos 🚀</h2>
+            <div class="projects-grid">
+                {% for project in projects %}
+                <div class="project-card">
+                    <h3>{{ project.title }}</h3>
+                    <p>{{ project.description }}</p>
+                    <img src="{{ project.image.url }}" alt="{{ project.title }}" />
+                    <a href="{{ project.url }}" class="project-link" target="_blank">🔗 Ver sitio web</a>
+
+                    <div class="tech-tags">
+                        {% for tech in project.technologies.all %}
+                            <span class="tech-tag">{{ tech.name }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
         <section class="section fade-in" id="interests">
-            <h2>Mis áreas de interés</h2>
+            <h2>Mis áreas de conocimientos 🧠</h2>
             <div class="interests-grid">
                 <div class="interest-card">
                     <h3>Arquitectura Web</h3>
@@ -446,23 +467,43 @@
             </div>
         </section>
 
-        <section class="section fade-in" id="projects">
-            <h2>🚀 Mis Proyectos</h2>
-            <div class="projects-grid">
-                {% for project in projects %}
-                <div class="project-card">
-                    <h3>{{ project.title }}</h3>
-                    <p>{{ project.description }}</p>
-                    <img src="{{ project.image.url }}" alt="{{ project.title }}" />
-                    <a href="{{ project.url }}" class="project-link" target="_blank">🔗 Ver sitio web</a>
+        <section class="hero fade-in" id="skills">
+            <div class="hero-content">
+                <h2>Skills - Habilidades ⚡</h2>
+                 <h3>🧠 Lenguajes de Programación</h3>
+                <ul>
+                    <li>Python (análisis de datos, backend con Django)</li>
+                    <li>JavaScript (frontend interactivo, backend con Node.js)</li>
+                    <li>HTML5 & CSS3</li>
+                    <li>SQL (consultas, manipulación de datos)</li>
+                    <li>Bash (uso básico en terminal)</li>
+                </ul>
 
-                    <div class="tech-tags">
-                        {% for tech in project.technologies.all %}
-                            <span class="tech-tag">{{ tech.name }}</span>
-                        {% endfor %}
-                    </div>
-                </div>
-                {% endfor %}
+                <h3>⚙️ Frameworks y Librerías</h3>
+                <ul>
+                    <li>Django (backend web, ORM, sistema de autenticación)</li>
+                    <li>Node.js (construcción de APIs RESTful)</li>
+                    <li>Express.js (framework minimalista para backend rápido)</li>
+                    <li>Tailwind CSS (estilización moderna y responsive)</li>
+                    <li>Bootstrap (estilo rápido y componentes)</li>
+                    <li>Pandas (análisis de datos con Python)</li>
+                    <li>Matplotlib / Seaborn (visualización de datos)</li>
+                    <li>NumPy (operaciones numéricas)</li>
+                </ul>
+
+                <h3>🧩 Bases de Datos</h3>
+                <ul>
+                    <li>PostgreSQL (principal en proyectos Django)</li>
+                    <li>SQLite (para desarrollo local y pruebas)</li>
+                </ul>
+
+                <h3>🛠️ Herramientas y Tecnologías</h3>
+                <ul>
+                    <li>Git y GitHub (control de versiones y colaboración)</li>
+                    <li>Render (despliegue de aplicaciones Django)</li>
+                    <li>Visual Studio Code / PyCharm</li>
+                    <li>Entornos virtuales con <code>venv</code></li>
+                </ul>
             </div>
         </section>
 
